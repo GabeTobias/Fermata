@@ -1,0 +1,115 @@
+Features:
+  ☐ Music Editor
+  ☐ Theory Quizes
+  ☐ Theory Tutorials
+  ☐ Cloud Sync
+  ☐ Gamification Level System
+  ☐ Chord Namer (Guitar / Piano)
+
+Architecture:
+  ☐ Staff Manipulator (Model/View/Controler)
+  ☐ Auth (JWT)
+  ☐ Quiz (Flyweight)  [q,q,q,q] index -> Render(index)
+    ☐ Quiz Renderer with form binding
+    ☐ Question Generator (Factory)
+  ☐ Tutorial (Static)
+    ☐ Tutorial Creator (Builder)
+    ☐ Tutorial Step
+  ☐ Cloud Sync (Observer)
+    ☐ Data Store (Redux)
+    ☐ Store Manipulator (Hooks)
+      ☐ Quiz Manip
+      ☐ Tutorial Manip
+      ☐ Music Manip 
+
+Day 1:
+  ✔ Draw Basic Stave @done(23-04-28 19:44)
+  ✔ Calculate mouse position relative to stave @done(23-04-28 20:12)
+  ✔ Find relative note for the mouses current y pos @done(23-04-28 20:12)
+  ✔ Constrain mouse input position to the confines of the stave @done(23-04-28 20:12)
+  ✔ Detect change in mouse relative note @done(23-04-28 20:12)
+  ✔ Redraw stave with a new ghost note at position @done(23-04-28 20:12)
+  ✔ Onclick add a note to the current phrase && Redraw @done(23-04-28 21:04)
+
+Day 2:
+  ✔ Add Note Type UI @done(23-04-29 18:44)
+  ✔ Add Note Type Rendering @done(23-04-29 18:44)
+  ✔ Draw Eight Note Beams @done(23-04-29 18:50)
+  ✔ Accidentals @done(23-04-29 19:34)
+  ✔ Dotted Notes @done(23-04-29 22:23)
+  ✔ Multiple Measure @done(23-04-30 22:13)
+  
+Day 3:
+  ✔ Detect note placement zones @done(23-05-01 23:11)
+  ✔ Lock Placement to newest zone @done(23-05-01 23:11)
+
+Day 4:
+  ✔ Notes split by measures get ties @done(23-05-03 13:35)
+  ✔ Ties @done(23-05-03 16:59)
+  ✔ Slurrs @done(23-05-03 16:59)
+  ✔ Rests @done(23-05-03 21:16)
+  
+Day 5:
+  ☐ Tuplet
+  ☐ Note Selection
+  ☐ Note Deletion
+  ☐ Chords  
+  
+Backlog:
+  ☐ Tempo
+  ☐ Articulation
+  ☐ Gesture
+  ☐ Repeat
+  ☐ Coda
+
+  ☐ File Serialization (localStorage for now)
+  ☐ Undo / Redo System
+  ☐ Clipboard
+  
+  ☐ Measure Splitting Dotted Notes
+
+VexFlow:
+  ☐ SetVoices PR
+    In the current system from my understanding you can only change the voices of a given
+    stave by regenerating the stave itself. But it would be useful if could update the voices
+    of a stave with some sort of a setVoices method with a passed stave.
+  ☐ Dotted note measurement
+    The current tick calculator requiresa mesure to have a correct number of beats per measure.
+    It doesn't however properly calculate dotted notes. In fact the third example in the wiki 
+    tutorial shows a measure with an incorrect number of beats. 
+
+Music Notation:
+  c#5/q, b4, c3, e3
+
+  StaveContext {
+    Clef,
+    TimeSignature,
+    KeySignature
+  }
+
+  Phrase {
+    StaveContext,
+    voiceA: c#5/q, b4, c3, e3
+    voiceB: c#5/q, b4, c3, e3
+    voiceC: c#5/q, b4, c3, e3
+    voiceD: c#5/q, b4, c3, e3
+  }
+
+  GenerateStave(phrase) {
+    return stave
+  }
+
+  This needs to only fire once per page otherwise we will get a bunc of inlined return functions
+  VexStaff(docID)
+  {
+    function setClef(){ ... }
+    function setTime(){ ... }
+
+    function setPhrase(phrase)
+    {
+      GenerateStave(phrase);
+      vf.draw();
+    }
+  }
+
+  const setPhrase = VexStaff(docID);
